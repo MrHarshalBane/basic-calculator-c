@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Calculator in C — Interactive Web & Terminal Experience</title>
+  <meta name="description" content="Experience the classic C basic calculator through both a sleek modern interactive calculator and an authentic C terminal simulator. Built with vanilla HTML, CSS, and JavaScript.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔢</text></svg>">
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="logo-group">
+        <div class="c-badge">
+          <span class="c-lang">C</span>
+        </div>
+        <div>
+          <h1 class="site-title">Basic Calculator <span class="accent-text">in C</span></h1>
+          <p class="site-subtitle">Dual Mode: Modern Graphic UI & Authentic Terminal Simulator</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- View Mode Switcher -->
+        <div class="mode-tabs" role="tablist">
+          <button id="tab-modern" class="mode-tab active" role="tab" aria-selected="true">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+              <line x1="8" y1="6" x2="16" y2="6"></line>
+              <line x1="16" y1="14" x2="16" y2="18"></line>
+              <path d="M16 10h.01"></path>
+              <path d="M12 10h.01"></path>
+              <path d="M8 10h.01"></path>
+              <path d="M12 14h.01"></path>
+              <path d="M8 14h.01"></path>
+              <path d="M12 18h.01"></path>
+              <path d="M8 18h.01"></path>
+            </svg>
+            Modern Calculator
+          </button>
+          <button id="tab-terminal" class="mode-tab" role="tab" aria-selected="false">
+            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            C Terminal Simulator
+          </button>
+        </div>
+
+        <a href="https://github.com/MrHarshalBane/basic-calculator-c" target="_blank" rel="noopener noreferrer" class="github-btn" title="View Source on GitHub">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Showcase Container -->
+  <main class="main-wrapper">
+    <div class="content-grid">
+
+      <!-- LEFT COLUMN: Dual Calculator View -->
+      <section class="calculator-column">
+
+        <!-- VIEW 1: MODERN GLASSMORPHIC CALCULATOR -->
+        <div id="modern-view" class="calc-card glassmorphism active-view">
+          <!-- Calc Status Bar -->
+          <div class="calc-top-bar">
+            <span class="calc-brand">C-CALC <small>v1.0</small></span>
+            <div class="status-indicators">
+              <span class="status-chip" id="operator-indicator">READY</span>
+              <button id="sound-toggle-btn" class="icon-action-btn" title="Toggle audio feedback">
+                <svg id="sound-icon-on" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <svg id="sound-icon-off" class="hidden" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <line x1="23" y1="9" x2="17" y2="15"></line>
+                  <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- LCD Screen Display -->
+          <div class="calc-display-panel">
+            <div class="display-history" id="calc-history"></div>
+            <div class="display-main-row">
+              <span class="active-op-symbol" id="calc-curr-op"></span>
+              <div class="display-value" id="calc-display">0</div>
+            </div>
+          </div>
+
+          <!-- Keypad Grid -->
+          <div class="keypad-grid">
+            <button class="key-btn func-key" data-action="clear" id="key-ac">AC</button>
+            <button class="key-btn func-key" data-action="backspace" id="key-del">⌫</button>
+            <button class="key-btn func-key" data-action="negate" id="key-neg">±</button>
+            <button class="key-btn op-key" data-op="/" id="key-div">÷</button>
+
+            <button class="key-btn num-key" data-num="7">7</button>
+            <button class="key-btn num-key" data-num="8">8</button>
+            <button class="key-btn num-key" data-num="9">9</button>
+            <button class="key-btn op-key" data-op="*" id="key-mul">×</button>
+
+            <button class="key-btn num-key" data-num="4">4</button>
+            <button class="key-btn num-key" data-num="5">5</button>
+            <button class="key-btn num-key" data-num="6">6</button>
+            <button class="key-btn op-key" data-op="-" id="key-sub">−</button>
+
+            <button class="key-btn num-key" data-num="1">1</button>
+            <button class="key-btn num-key" data-num="2">2</button>
+            <button class="key-btn num-key" data-num="3">3</button>
+            <button class="key-btn op-key" data-op="+" id="key-add">+</button>
+
+            <button class="key-btn num-key zero-key" data-num="0">0</button>
+            <button class="key-btn num-key" data-action="decimal">.</button>
+            <button class="key-btn equals-key" data-action="equals" id="key-equals">=</button>
+          </div>
+
+          <!-- Quick Tip -->
+          <div class="calc-footer-note">
+            <span>⌨ Keyboard support enabled: Numbers, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>Enter</code>, <code>Backspace</code></span>
+          </div>
+        </div>
+
+        <!-- VIEW 2: AUTHENTIC C TERMINAL EMULATOR -->
+        <div id="terminal-view" class="terminal-card glassmorphism">
+          <!-- Terminal Title Bar -->
+          <div class="terminal-header">
+            <div class="window-controls">
+              <span class="ctrl-dot dot-red"></span>
+              <span class="ctrl-dot dot-yellow"></span>
+              <span class="ctrl-dot dot-green"></span>
+            </div>
+            <div class="terminal-title">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 17 10 11 4 5"></polyline>
+                <line x1="12" y1="19" x2="20" y2="19"></line>
+              </svg>
+              <span>gcc main.c -o calculator && ./calculator</span>
+            </div>
+            <div class="terminal-actions">
+              <button id="terminal-restart-btn" class="term-btn" title="Restart execution">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Terminal Screen -->
+          <div class="terminal-body" id="term-screen">
+            <div class="term-line banner">
+              <span class="term-green">GNU C Compiler 14.2 (x86_64-pc-linux-gnu)</span>
+            </div>
+            <div class="term-line banner">
+              <span class="term-cyan">Compiled: main.c (ISO C99 standard)</span>
+            </div>
+            <div class="term-line banner divider">----------------------------------------------------</div>
+            <div id="term-logs"></div>
+            
+            <!-- Active prompt input area -->
+            <div class="term-input-row" id="term-input-row">
+              <span class="term-prompt-label" id="term-prompt-text">Enter operator (+ - * /): </span>
+              <div class="term-input-wrapper">
+                <input type="text" id="term-user-input" autocomplete="off" autofocus spellcheck="false">
+                <span class="term-cursor"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Terminal Help Bar -->
+          <div class="terminal-footer">
+            <span>Type value and press <kbd>Enter</kbd> • Type <kbd>clear</kbd> or <kbd>restart</kbd> anytime</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN: C Source Code Explorer & Real-Time Flow Tracer -->
+      <section class="code-column">
+
+        <!-- C Code Inspector Card -->
+        <div class="code-card glassmorphism">
+          <div class="code-header">
+            <div class="code-header-left">
+              <div class="file-icon">C</div>
+              <div>
+                <h3 class="file-name">main.c</h3>
+                <span class="file-meta">Original repository source • 29 lines</span>
+              </div>
+            </div>
+
+            <div class="code-header-actions">
+              <button id="copy-c-btn" class="pill-btn">
+                <svg id="copy-c-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span id="copy-c-text">Copy C Code</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Syntax-Highlighted Code Viewer with Line Highlights -->
+          <div class="code-viewer-container">
+            <pre class="code-block" id="c-code-pre"><code id="c-code-content"></code></pre>
+          </div>
+
+          <!-- Real-Time C Execution Trace Panel -->
+          <div class="trace-panel">
+            <div class="trace-title">
+              <span class="pulse-dot"></span>
+              <span>C State Variables Inspector</span>
+            </div>
+            <div class="variables-grid">
+              <div class="var-box">
+                <span class="var-type">char</span>
+                <span class="var-name">op</span>
+                <span class="var-val" id="trace-op">None</span>
+              </div>
+              <div class="var-box">
+                <span class="var-type">double</span>
+                <span class="var-name">a</span>
+                <span class="var-val" id="trace-a">0.00</span>
+              </div>
+              <div class="var-box">
+                <span class="var-type">double</span>
+                <span class="var-name">b</span>
+                <span class="var-val" id="trace-b">0.00</span>
+              </div>
+              <div class="var-box highlight-var">
+                <span class="var-type">double</span>
+                <span class="var-name">result</span>
+                <span class="var-val" id="trace-res">0.00</span>
+              </div>
+            </div>
+            <div class="trace-status" id="trace-status-message">
+              Waiting for input: Enter numbers or choose an arithmetic operator.
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculation History Drawer / Card -->
+        <div class="history-card glassmorphism">
+          <div class="history-header">
+            <div class="history-title-group">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <h3>Recent Calculations</h3>
+            </div>
+            <button id="clear-history-btn" class="text-btn">Clear</button>
+          </div>
+
+          <div class="history-list" id="history-items">
+            <div class="history-empty">No calculations yet. Start calculating to record history!</div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>
+        <strong>Basic Calculator in C</strong> • Created by <a href="https://github.com/MrHarshalBane" target="_blank" rel="noopener noreferrer">@MrHarshalBane</a>
+      </p>
+      <p class="sub-footer">
+        Standard C (ISO/IEC 9899) • Zero dependencies • Pure Vanilla HTML5, CSS3, & JS
+      </p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
