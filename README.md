@@ -5,6 +5,9 @@ This is a simple basic calculator written in C.
 It takes an arithmetic operator (+, -, *, /) and two numbers as input, then prints the result.  
 Great for beginners learning C programming.
 
+🌐 **Live Interactive Web & Terminal Simulator**: [https://mrharshalbane.github.io/basic-calculator-c/](https://mrharshalbane.github.io/basic-calculator-c/)
+
+
 ## 🚀 Features
 - Addition
 - Subtraction
